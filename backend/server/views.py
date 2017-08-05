@@ -4,6 +4,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from server.models import Tarefa
 from server.serializers import TarefaSerializer
+from django.shortcuts import redirect
 
 @csrf_exempt
 def tarefa_lista(request):

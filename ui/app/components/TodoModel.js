@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 
 export default Backbone.Model.extend({
-  urlRoot: 'http://localhost:8000/tarefa/',
+  urlRoot: '/rest/tarefa/',
   url: function () {
     if (this.id) {
       return this.urlRoot + this.id + '/';

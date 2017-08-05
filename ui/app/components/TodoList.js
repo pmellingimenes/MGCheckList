@@ -2,7 +2,7 @@ import Backbone from 'backbone';
 import TodoModel from './TodoModel';
 
 export default Backbone.Collection.extend({
-  url: 'http://localhost:8000/tarefa/',
+  url: '/rest/tarefa/',
   model: TodoModel,
   comparator: 'created',
 
