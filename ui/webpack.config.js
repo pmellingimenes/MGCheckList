@@ -39,7 +39,7 @@ const webpackCommon = {
   },
   output: {
     filename: 'static/app.js',
-    path: path.join(__dirname, '/public'),
+    path: path.join(__dirname, '../backend/public'),
     publicPath: '/'
   },
   plugins: [
