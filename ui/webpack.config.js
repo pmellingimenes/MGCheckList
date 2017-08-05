@@ -38,12 +38,12 @@ const webpackCommon = {
     ]
   },
   output: {
-    filename: 'app.js',
-    path: path.join(__dirname, '../backend/public'),
+    filename: 'static/app.js',
+    path: path.join(__dirname, '/public'),
     publicPath: '/'
   },
   plugins: [
-    new ExtractTextPlugin('app.css'),
+    new ExtractTextPlugin('static/app.css'),
     new CopyWebpackPlugin([
       {
         from: './app/assets/index.html',
