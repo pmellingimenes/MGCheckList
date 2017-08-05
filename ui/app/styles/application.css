@@ -77,7 +77,7 @@ input[type="checkbox"] {
 	font-size: 100px;
 	font-weight: 100;
 	text-align: center;
-	color: rgba(175, 47, 47, 0.15);
+	color: rgba(175, 47, 47, 0.7);
 	-webkit-text-rendering: optimizeLegibility;
 	-moz-text-rendering: optimizeLegibility;
 	text-rendering: optimizeLegibility;
@@ -326,7 +326,8 @@ html #clear-completed:active {
 #info {
 
 	margin: 65px auto 0;
-	color: firebrick;
+	color: black;
+	font-weight: bold;
 	font-size: 16px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	text-align: center;
