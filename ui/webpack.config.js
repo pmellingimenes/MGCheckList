@@ -1,10 +1,10 @@
-'use strict';
+'use strict'
 
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
-const merge = require('webpack-merge');
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path')
+const merge = require('webpack-merge')
 
 const webpackCommon = {
   entry: {
@@ -64,7 +64,7 @@ const webpackCommon = {
   resolveLoader: {
     modules: [path.join(__dirname, './node_modules')]
   }
-};
+}
 
 switch (process.env.npm_lifecycle_event) {
   case 'start':
@@ -76,11 +76,11 @@ switch (process.env.npm_lifecycle_event) {
         compress: true,
         port: 9000
       }
-    });
-    break;
+    })
+    break
   default:
     module.exports = merge(webpackCommon, {
       devtool: 'source-map'
-    });
-    break;
+    })
+    break
 }

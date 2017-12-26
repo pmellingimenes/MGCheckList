@@ -1,20 +1,20 @@
-import Backbone from 'backbone';
-import TodoModel from './TodoModel';
+import Backbone from 'backbone'
+import TodoModel from './TodoModel'
 
 export default Backbone.Collection.extend({
-  url: '/rest/tarefa/',
+  url: 'http://localhost:8000/rest/tarefa/',
   model: TodoModel,
   comparator: 'created',
 
   getCompleted: function () {
-    return this.filter(this._isCompleted);
+    return this.filter(this._isCompleted)
   },
 
   getActive: function () {
-    return this.reject(this._isCompleted);
+    return this.reject(this._isCompleted)
   },
 
   _isCompleted: function (todo) {
-    return todo.isCompleted();
+    return todo.isCompleted()
   }
-});
+})

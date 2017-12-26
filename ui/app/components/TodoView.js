@@ -1,4 +1,4 @@
-import Mn from 'backbone.marionette';
+import Mn from 'backbone.marionette'
 
 export default Mn.View.extend({
   url: 'http://localhost:8000/tarefa/',
@@ -7,7 +7,7 @@ export default Mn.View.extend({
   template: '#template-todoItemView',
 
   className: function () {
-    return this.model.get('completed') ? 'completed' : 'active';
+    return this.model.get('completed') ? 'completed' : 'active'
   },
 
   ui: {
@@ -30,41 +30,41 @@ export default Mn.View.extend({
   },
 
   deleteModel: function () {
-    this.model.destroy();
+    this.model.destroy()
   },
 
   toggle: function () {
-    this.model.toggle().save();
+    this.model.toggle().save()
   },
 
   onEditClick: function () {
-    this.$el.addClass('editing');
-    this.ui.edit.focus();
-    this.ui.edit.val(this.ui.edit.val());
+    this.$el.addClass('editing')
+    this.ui.edit.focus()
+    this.ui.edit.val(this.ui.edit.val())
   },
 
   onEditFocusout: function () {
-    var todoText = this.ui.edit.val().trim();
+    var todoText = this.ui.edit.val().trim()
     if (todoText) {
-      this.model.set('title', todoText).save();
-      this.$el.removeClass('editing');
+      this.model.set('title', todoText).save()
+      this.$el.removeClass('editing')
     } else {
-      this.destroy();
+      this.destroy()
     }
   },
 
   onEditKeypress: function (e) {
-    var ENTER_KEY = 13;
-    var ESC_KEY = 27;
+    var ENTER_KEY = 13
+    var ESC_KEY = 27
 
     if (e.which === ENTER_KEY) {
-      this.onEditFocusout();
-      return;
+      this.onEditFocusout()
+      return
     }
 
     if (e.which === ESC_KEY) {
-      this.ui.edit.val(this.model.get('title'));
-      this.$el.removeClass('editing');
+      this.ui.edit.val(this.model.get('title'))
+      this.$el.removeClass('editing')
     }
   }
-});
+})

@@ -1,4 +1,4 @@
-import Mn from 'backbone.marionette';
+import Mn from 'backbone.marionette'
 export default Mn.View.extend({
   el: '#checklistapp',
   regions: {
@@ -6,4 +6,4 @@ export default Mn.View.extend({
     main: '#main',
     footer: '#footer'
   }
-});
+})

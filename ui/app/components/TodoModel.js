@@ -1,12 +1,12 @@
-import Backbone from 'backbone';
+import Backbone from 'backbone'
 
 export default Backbone.Model.extend({
-  urlRoot: '/rest/tarefa/',
+  urlRoot: 'http://localhost:8000/rest/tarefa/',
   url: function () {
     if (this.id) {
-      return this.urlRoot + this.id + '/';
+      return this.urlRoot + this.id + '/'
     } else {
-      return this.urlRoot;
+      return this.urlRoot
     }
   },
   defaults: {
@@ -16,22 +16,22 @@ export default Backbone.Model.extend({
   },
   initialize: function () {
     if (this.isNew()) {
-      this.set('created', new Date());
+      this.set('created', new Date())
     }
   },
   toggle: function () {
-    return this.set('completed', !this.isCompleted());
+    return this.set('completed', !this.isCompleted())
   },
   isCompleted: function () {
-    return this.get('completed');
+    return this.get('completed')
   },
   matchesFilter: function (filter) {
     if (filter === 'all') {
-      return true;
+      return true
     }
     if (filter === 'active') {
-      return !this.isCompleted();
+      return !this.isCompleted()
     }
-    return this.isCompleted();
+    return this.isCompleted()
   }
-});
+})

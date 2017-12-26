@@ -1,7 +1,7 @@
-import Mn from 'backbone.marionette';
-import Backbone from 'backbone';
+import Mn from 'backbone.marionette'
+import Backbone from 'backbone'
 
-var filterChannel = Backbone.Radio.channel('filter');
+var filterChannel = Backbone.Radio.channel('filter')
 
 export default Mn.View.extend({
   template: '#template-footer',
@@ -21,37 +21,37 @@ export default Mn.View.extend({
   },
   templateContext: {
     activeCountLabel: function () {
-      return (this.activeCount === 1 ? 'tarefa' : 'tarefas') + ' p/ encerrar';
+      return (this.activeCount === 1 ? 'tarefa' : 'tarefas') + ' p/ encerrar'
     }
   },
 
   initialize: function () {
-    this.listenTo(filterChannel.request('filterState'), 'change:filter', this.updateFilterSelection, this);
+    this.listenTo(filterChannel.request('filterState'), 'change:filter', this.updateFilterSelection, this)
   },
   serializeData: function () {
-    var active = this.collection.getActive().length;
-    var total = this.collection.length;
+    var active = this.collection.getActive().length
+    var total = this.collection.length
 
     return {
       activeCount: active,
       totalCount: total,
       completedCount: total - active
-    };
+    }
   },
   onRender: function () {
-    this.$el.parent().toggle(this.collection.length > 0);
-    this.updateFilterSelection();
+    this.$el.parent().toggle(this.collection.length > 0)
+    this.updateFilterSelection()
   },
   updateFilterSelection: function () {
-    this.ui.filters.removeClass('selected');
+    this.ui.filters.removeClass('selected')
     this.ui[filterChannel.request('filterState').get('filter')]
-        .addClass('selected');
+        .addClass('selected')
   },
 
   onClearClick: function () {
-    var completed = this.collection.getCompleted();
+    var completed = this.collection.getCompleted()
     completed.forEach(function (todo) {
-      todo.destroy();
-    });
+      todo.destroy()
+    })
   }
-});
+})
