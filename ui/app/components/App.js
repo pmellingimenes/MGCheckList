@@ -11,63 +11,57 @@ const filterState = new Backbone.Model({
   filter: 'all'
 })
 const filterChannel = Backbone.Radio.channel('filter')
-filterChannel.reply('filterState', function () {
-  return filterState
-})
+filterChannel.reply('filterState', () => { return filterState })
+
+const appController = {
+  filterItems (filter) {
+    let newFilter = filter ? filter.trim() : 'all'
+    filterChannel.request('filterState').set('filter', newFilter)
+  }
+}
 
 export default Mn.Application.extend({
-  setRootLayout: function () {
+  setRootLayout () {
     this.root = new RootLayout()
   },
+  router: new Router({
+    controller: appController
+  }),
   onStart () {
     this.setRootLayout()
-    var app = this
-    var Controller = Mn.Object.extend({
-      initialize: function () {
-        this.todoList = new TodoList()
-      },
-      start: function () {
-        this.showHeader(this.todoList)
-        this.showFooter(this.todoList)
-        this.showTodoList(this.todoList)
-        this.todoList.on('all', this.updateHiddenElements, this)
-        this.todoList.fetch()
-      },
-
-      updateHiddenElements: function () {
-        $('#main, #footer').toggle(!!this.todoList.length)
-      },
-
-      showHeader: function (todoList) {
-        var header = new HeaderLayout({
-          collection: todoList
-        })
-        app.root.showChildView('header', header)
-      },
-
-      showFooter: function (todoList) {
-        var footer = new FooterLayout({
-          collection: todoList
-        })
-        app.root.showChildView('footer', footer)
-      },
-
-      showTodoList: function (todoList) {
-        app.root.showChildView('main', new ListView({
-          collection: todoList
-        }))
-      },
-
-      filterItems: function (filter) {
-        var newFilter = filter && filter.trim() || 'all'
-        filterChannel.request('filterState').set('filter', newFilter)
-      }
-    })
-    var controller = new Controller()
-    controller.router = new Router({
-      controller: controller
-    })
-    controller.start()
+    this.todoList = new TodoList()
+    this.initializeApplication()
     Backbone.history.start()
+  },
+  initializeApplication () {
+    this.showHeader(this.todoList)
+    this.showFooter(this.todoList)
+    this.showTodoList(this.todoList)
+    this.todoList.on('all', this.updateHiddenElements, this)
+    this.todoList.fetch()
+  },
+
+  updateHiddenElements () {
+    this.root.$el.find('#main, #footer').toggle(!!this.todoList.length)
+  },
+
+  showHeader (todoList) {
+    let header = new HeaderLayout({
+      collection: todoList
+    })
+    this.root.showChildView('header', header)
+  },
+
+  showFooter (todoList) {
+    let footer = new FooterLayout({
+      collection: todoList
+    })
+    this.root.showChildView('footer', footer)
+  },
+
+  showTodoList (todoList) {
+    this.root.showChildView('main', new ListView({
+      collection: todoList
+    }))
   }
 })
